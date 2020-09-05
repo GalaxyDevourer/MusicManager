@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Song Manager</string>
+    <string name="welcome_text">Welcome, there you can manage your favourite bands and songs</string>
+    <string name="button_text">Show bands</string>
+    <string name="list_songs_text">There will be songs list</string>
+
+    <string-array name="groups_list">
+        <item>System Of A Down</item>
+        <item>Nirvana</item>
+        <item>Disturbed</item>
+        <item>Linkin Park</item>
+        <item>Starset</item>
+    </string-array>
+</resources>
