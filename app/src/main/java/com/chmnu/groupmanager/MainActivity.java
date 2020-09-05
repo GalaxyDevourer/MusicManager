@@ -2,15 +2,12 @@ package com.chmnu.groupmanager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Spinner;
-import android.widget.TextView;
 
-import com.chmnu.groupmanager.entities.Song;
-import com.chmnu.groupmanager.entities.SongStorage;
-
-import java.util.List;
+import com.chmnu.groupmanager.activities.ShowTracksActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,13 +21,10 @@ public class MainActivity extends AppCompatActivity {
         Spinner spinner = findViewById(R.id.check_group_spinner);
         String bandName = spinner.getSelectedItem().toString();
 
-        StringBuilder songList = new StringBuilder();
-        List<Song> songsList = new SongStorage().getByBandName(bandName);
-        for(Song song: songsList) {
-            songList.append(song.getSignature()).append("\n");
-        }
+        Intent intent = new Intent(this, ShowTracksActivity.class);
+        intent.putExtra(ShowTracksActivity.BAND_NAME, bandName);
 
-        TextView textView = findViewById(R.id.list_songs_text);
-        textView.setText(songList);
+        startActivity(intent);
+
     }
 }
