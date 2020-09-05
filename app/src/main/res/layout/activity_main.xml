@@ -4,35 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/welcome_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/welcome_text"
+        android:text="@string/main_welcome"
         android:textAlignment="center"
         android:textSize="18sp" />
 
     <Spinner
         android:id="@+id/check_group_spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/groups_list"/>
+        android:layout_height="38dp"
+        android:entries="@array/main_groups_list" />
 
     <Button
         android:id="@+id/show_group_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onBtnClick"
-        android:text="@string/button_text"
-        android:textAlignment="center" />
-
-    <TextView
-        android:id="@+id/list_songs_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/list_songs_text"
+        android:text="@string/main_button"
         android:textAlignment="center" />
 
 </LinearLayout>
