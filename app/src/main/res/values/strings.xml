@@ -1,14 +1,20 @@
 <resources>
+    <!-- activity_main -->
     <string name="app_name">Song Manager</string>
-    <string name="welcome_text">Welcome, there you can manage your favourite bands and songs</string>
-    <string name="button_text">Show bands</string>
-    <string name="list_songs_text">There will be songs list</string>
-
-    <string-array name="groups_list">
+    <string name="main_welcome">Welcome, there you can manage your favourite bands and songs</string>
+    <string name="main_button">Show Tracks</string>
+    <string-array name="main_groups_list">
         <item>System Of A Down</item>
         <item>Nirvana</item>
         <item>Disturbed</item>
         <item>Linkin Park</item>
         <item>Starset</item>
     </string-array>
+
+    <!-- activity_show_tracks -->
+    <string name="show_tracks_list_songs">There will be songs list</string>
+    <string name="show_tracks_send_button">Send tracks list</string>
+    <string name="show_tracks_plus_button">+</string>
+    <string name="show_tracks_minus_button">-</string>
+
 </resources>
