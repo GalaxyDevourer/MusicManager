@@ -48,6 +48,8 @@ public class ShowTracksActivity extends AppCompatActivity {
         textSize = textView.getTextSize();
         if (savedInstanceState != null) {
             textSize = savedInstanceState.getFloat("textSize");
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+
             timeSecond = savedInstanceState.getInt("timeSecond");
         }
 
@@ -106,14 +108,20 @@ public class ShowTracksActivity extends AppCompatActivity {
     }
 
     public void onPlusBtnClick (View view) {
-        textSize *= 1.05;
+        textSize *= 1.05f;
         TextView textView = findViewById(R.id.list_songs_text);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
     }
 
     public void onMinusBtnClick (View view) {
-        textSize /= 1.05;
+        textSize /= 1.05f;
         TextView textView = findViewById(R.id.list_songs_text);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+    }
+
+    public void onBtnClick_ (View view) {
+        Intent intent = new Intent(this, TestActivity.class);
+
+        startActivity(intent);
     }
 }
