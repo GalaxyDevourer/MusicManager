@@ -17,7 +17,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void onBtnClick (View view) {
+    public void onShowBtnClick (View view) {
+        Spinner spinner = findViewById(R.id.check_group_spinner);
+        String bandName = spinner.getSelectedItem().toString();
+
+        Intent intent = new Intent(this, ShowTracksActivity.class);
+        intent.putExtra(ShowTracksActivity.BAND_NAME, bandName);
+
+        startActivity(intent);
+
+    }
+
+    public void onSearchBtnClick (View view) {
         Spinner spinner = findViewById(R.id.check_group_spinner);
         String bandName = spinner.getSelectedItem().toString();
 

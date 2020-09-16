@@ -2,7 +2,8 @@
     <!-- activity_main -->
     <string name="app_name">Song Manager</string>
     <string name="main_welcome">Welcome, there you can manage your favourite bands and songs</string>
-    <string name="main_button">Show Tracks</string>
+    <string name="main_show_button">Show Tracks</string>
+    <string name="main_search_button">Search it!</string>
     <string-array name="main_groups_list">
         <item>System Of A Down</item>
         <item>Nirvana</item>

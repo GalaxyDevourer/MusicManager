@@ -120,7 +120,7 @@ public class ShowTracksActivity extends AppCompatActivity {
     }
 
     public void onBtnClick_ (View view) {
-        Intent intent = new Intent(this, TestActivity.class);
+        Intent intent = new Intent(this, SearchActivity.class);
 
         startActivity(intent);
     }
