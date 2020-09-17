@@ -18,8 +18,7 @@
     <Spinner
         android:id="@+id/check_group_spinner"
         android:layout_width="match_parent"
-        android:layout_height="49dp"
-        android:entries="@array/main_groups_list" />
+        android:layout_height="49dp" />
 
     <Button
         android:id="@+id/show_group_button"

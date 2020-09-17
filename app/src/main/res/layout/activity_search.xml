@@ -1,9 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/check_is_not_single"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:orientation="vertical"
     tools:context=".activities.SearchActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/band_avatar"
+            android:layout_width="match_parent"
+            android:layout_height="207dp"
+            android:baselineAligned="false"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/group_information_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@android:color/background_dark"
+            android:text="@string/search_band_short_info"
+            android:textAlignment="center"
+            android:textColor="#EEEEEE"
+            android:textSize="18sp"
+            tools:ignore="RtlCompat" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/band_name"
+            android:layout_width="163dp"
+            android:layout_height="wrap_content"
+            android:text="@string/search_band_name"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/band_name_enter"
+            android:layout_width="249dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/album_name"
+            android:layout_width="163dp"
+            android:layout_height="wrap_content"
+            android:text="@string/search_band_album_name"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/album_name_choice"
+            android:layout_width="match_parent"
+            android:layout_height="49dp" />
+
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/decades_label"
+                android:layout_width="163dp"
+                android:layout_height="wrap_content"
+                android:text="@string/search_band_decade"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <RadioGroup>
+
+                <RadioButton
+                    android:id="@+id/radio_early"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/search_radio_decade_early" />
+
+                <RadioButton
+                    android:id="@+id/radio_elder"
+                    android:layout_width="163dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/search_radio_decade_elder" />
+            </RadioGroup>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/single_label"
+                android:layout_width="163dp"
+                android:layout_height="wrap_content"
+                android:text="@string/search_band_single"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/check_is_single"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/search_check_is_single" />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/search_check_not_single" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/search_find_button" />
+
+    </LinearLayout>
+
+</LinearLayout>
