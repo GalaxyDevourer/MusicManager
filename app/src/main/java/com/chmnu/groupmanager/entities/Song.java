@@ -1,5 +1,7 @@
 package com.chmnu.groupmanager.entities;
 
+import android.text.BoringLayout;
+
 public class Song {
     private String songName;
     private String bandName;
@@ -14,6 +16,12 @@ public class Song {
         this.bandCountry = bandCountry;
         this.album = album;
         this.albumYear = albumYear;
+        this.single = single;
+    }
+
+    public Song(String bandName, String album, Boolean single) {
+        this.bandName = bandName;
+        this.album = album;
         this.single = single;
     }
 
@@ -67,5 +75,9 @@ public class Song {
 
     public String getSignature () {
         return bandName + " [" + bandCountry + "]" + " - " + songName + " [ " + album + " " + albumYear + " ]";
+    }
+
+    public Boolean customEquals (Song song) {
+        return bandName.equals(song.bandName) && album.equals(song.album) && single.equals(song.single);
     }
 }

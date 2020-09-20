@@ -1,23 +1,28 @@
 package com.chmnu.groupmanager.activities;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chmnu.groupmanager.R;
 import com.chmnu.groupmanager.entities.Band;
 import com.chmnu.groupmanager.entities.BandStorage;
+import com.chmnu.groupmanager.entities.Song;
 import com.chmnu.groupmanager.entities.SongStorage;
+
+import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -51,6 +56,46 @@ public class SearchActivity extends AppCompatActivity {
         spinnerAlbum.setDropDownVerticalOffset(10);
 
         setBandAvatar(bandName);
+    }
+
+    public void onFindBtnClick (View view) {
+        StringBuilder message = new StringBuilder();
+
+        EditText nameBand = findViewById(R.id.band_name_enter);
+        Spinner albumName = findViewById(R.id.album_name_choice);
+        RadioButton isEarly = findViewById(R.id.radio_early);
+        CheckBox isSingle = findViewById(R.id.check_is_single);
+
+        boolean radio = false;
+        if (isEarly.isChecked()) {
+            radio = true;
+        }
+
+        boolean checkBox = false;
+        if (isSingle.isChecked()) {
+            checkBox = true;
+        }
+
+        List<Song> songList = new SongStorage().getSearchedSongs(nameBand.getText().toString(), albumName.getSelectedItem().toString(), radio, checkBox );
+        for (Song song: songList) {
+            message.append(song.getSignature()).append("\n");
+        }
+
+        Toast.makeText(this, message.toString(), Toast.LENGTH_LONG).show();
+    }
+
+    public void onCheckIsSingle (View view) {
+        CheckBox isSingle = findViewById(R.id.check_is_single);
+        CheckBox notSingle = findViewById(R.id.check_is_not_single);
+
+        if (isSingle.isChecked()) notSingle.setChecked(false);
+    }
+
+    public void onCheckIsNotSingle (View view) {
+        CheckBox isSingle = findViewById(R.id.check_is_single);
+        CheckBox notSingle = findViewById(R.id.check_is_not_single);
+
+        if (notSingle.isChecked()) isSingle.setChecked(false);
     }
 
     private void setBandAvatar (String bandName) {

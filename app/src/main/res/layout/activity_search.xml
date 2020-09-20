@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/check_is_not_single"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:baselineAligned="false"
@@ -131,12 +130,15 @@
                     android:id="@+id/check_is_single"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/search_check_is_single" />
+                    android:text="@string/search_check_is_single"
+                    android:onClick="onCheckIsSingle"/>
 
                 <CheckBox
+                    android:id="@+id/check_is_not_single"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/search_check_not_single" />
+                    android:text="@string/search_check_not_single"
+                    android:onClick="onCheckIsNotSingle"/>
 
             </LinearLayout>
 
@@ -153,7 +155,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/search_find_button" />
+            android:text="@string/search_find_button"
+            android:onClick="onFindBtnClick"/>
 
     </LinearLayout>
 
