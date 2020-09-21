@@ -3,14 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:baselineAligned="false"
-    tools:context=".activities.SearchActivity">
+    tools:context=".activities.SearchActivityConstraint">
 
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/band_avatar"
@@ -32,40 +35,56 @@
             tools:ignore="RtlCompat" />
     </FrameLayout>
 
+
     <TextView
         android:id="@+id/band_name"
         android:layout_width="163dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="@string/search_band_name"
         android:textAlignment="center"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 
     <EditText
         android:id="@+id/band_name_enter"
         android:layout_width="249dp"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 
 
     <TextView
-            android:id="@+id/album_name"
-            android:layout_width="163dp"
-            android:layout_height="wrap_content"
-            android:text="@string/search_band_album_name"
-            android:textAlignment="center"
-            android:textSize="18sp" />
+        android:id="@+id/album_name"
+        android:layout_width="163dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/search_band_album_name"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
-            android:id="@+id/album_name_choice"
-            android:layout_width="match_parent"
-            android:layout_height="49dp" />
-
+        android:id="@+id/album_name_choice"
+        android:layout_width="249dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/band_name_enter" />
 
     <TableLayout
+        android:id="@+id/tableLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.574">
 
         <TableRow
             android:layout_width="match_parent"
@@ -109,31 +128,38 @@
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
-
-            <CheckBox
-                android:id="@+id/check_is_single"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="onCheckIsSingle"
-                android:text="@string/search_check_is_single" />
+                android:orientation="vertical">
 
-            <CheckBox
-                android:id="@+id/check_is_not_single"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="onCheckIsNotSingle"
-                android:text="@string/search_check_not_single" />
+                <CheckBox
+                    android:id="@+id/check_is_single"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onCheckIsSingle"
+                    android:text="@string/search_check_is_single" />
 
+                <CheckBox
+                    android:id="@+id/check_is_not_single"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onCheckIsNotSingle"
+                    android:text="@string/search_check_not_single" />
+            </LinearLayout>
         </TableRow>
 
     </TableLayout>
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_width="367dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="196dp"
+        android:onClick="onFindBtnClick"
         android:text="@string/search_find_button"
-        android:onClick="onFindBtnClick"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

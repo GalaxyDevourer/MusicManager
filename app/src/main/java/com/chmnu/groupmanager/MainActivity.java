@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
 import com.chmnu.groupmanager.activities.SearchActivity;
+import com.chmnu.groupmanager.activities.SearchActivityConstraint;
 import com.chmnu.groupmanager.activities.ShowTracksActivity;
 import com.chmnu.groupmanager.entities.BandStorage;
 import com.chmnu.groupmanager.entities.Song;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         Spinner spinner = findViewById(R.id.check_group_spinner);
         String bandName = spinner.getSelectedItem().toString();
 
-        Intent intent = new Intent(this, SearchActivity.class);
+        Intent intent = new Intent(this, SearchActivityConstraint.class);
         intent.putExtra(ShowTracksActivity.BAND_NAME, bandName);
 
         startActivity(intent);
