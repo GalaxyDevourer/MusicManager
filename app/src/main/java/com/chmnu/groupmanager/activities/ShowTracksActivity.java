@@ -9,12 +9,16 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.chmnu.groupmanager.R;
+import com.chmnu.groupmanager.entities.BandStorage;
 import com.chmnu.groupmanager.entities.Song;
 import com.chmnu.groupmanager.entities.SongStorage;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -22,6 +26,7 @@ import java.util.Objects;
 public class ShowTracksActivity extends AppCompatActivity {
 
     public static final String BAND_NAME = "bandName";
+    public static final String TRACKS_LIST_NAME = "bandsList";
 
     private float textSize = 0;
     private int timeSecond = 0;
@@ -33,9 +38,19 @@ public class ShowTracksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_tracks);
 
-        Intent intent = getIntent();
-        String bandName = intent.getStringExtra(BAND_NAME);
+        System.out.println("I`M ALIVE");
 
+        Intent intent = getIntent();
+
+        ArrayList<String> arrayList = intent.getStringArrayListExtra(TRACKS_LIST_NAME);
+
+        ListView bandsListView = findViewById(R.id.tracks_list);
+
+        assert arrayList != null;
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayList);
+        bandsListView.setAdapter(adapter);
+
+        /*
         StringBuilder songList = new StringBuilder();
         List<Song> songsList = new SongStorage().getByBandName(bandName);
         for(Song song: songsList) {
@@ -52,10 +67,29 @@ public class ShowTracksActivity extends AppCompatActivity {
 
             timeSecond = savedInstanceState.getInt("timeSecond");
         }
-
         runTimer();
+
+        */
     }
 
+    public void onSendBtnClick (View view) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+
+        StringBuilder tracksListMessage = new StringBuilder();
+
+        ListView tracksList = findViewById(R.id.tracks_list);
+        for (int i=0; i < tracksList.getCount() ; i++){
+            tracksListMessage.append(tracksList.getItemAtPosition(i)).append("\n");
+        }
+
+        intent.putExtra(Intent.EXTRA_TEXT, tracksListMessage.toString());
+        intent.putExtra(Intent.EXTRA_SUBJECT, "My tracks");
+
+        startActivity(intent);
+    }
+
+    /*
     @Override
     protected void onSaveInstanceState (@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -96,17 +130,6 @@ public class ShowTracksActivity extends AppCompatActivity {
 
     }
 
-    public void onSendBtnClick (View view) {
-        TextView textView = findViewById(R.id.list_songs_text);
-
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, textView.getText().toString());
-        intent.putExtra(Intent.EXTRA_SUBJECT, "My tracks");
-
-        startActivity(intent);
-    }
-
     public void onPlusBtnClick (View view) {
         textSize *= 1.05f;
         TextView textView = findViewById(R.id.list_songs_text);
@@ -124,4 +147,6 @@ public class ShowTracksActivity extends AppCompatActivity {
 
         startActivity(intent);
     }
+
+    */
 }

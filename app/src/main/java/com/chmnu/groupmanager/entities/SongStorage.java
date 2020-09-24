@@ -61,17 +61,12 @@ public class SongStorage {
         return albums;
     }
 
-    public List<Song> getSearchedSongs (String bandName, String albumName, Boolean isEarly, Boolean isSingle) {
-        List<Song> songs = new ArrayList<>();
+    public ArrayList<Song> getSearchedSongs (String bandName, String albumName, Boolean isEarly, Boolean isSingle) {
+        ArrayList<Song> songs = new ArrayList<>();
         Song signature_song = new Song(bandName, albumName, isSingle);
 
-        System.out.println("--------------------------");
-        System.out.println("Singature: " + bandName + " " + albumName + " " + isEarly + " " + isEarly);
         for (Song song: songsList) {
             if (song.customEquals(signature_song)) {
-                System.out.println(song.getSignature());
-                System.out.println("true true = " + isEarly(song.getAlbumYear()) + isEarly);
-                System.out.println("false false = " + !isEarly(song.getAlbumYear()) + !isEarly);
                 if (isEarly(song.getAlbumYear()) && isEarly) {
                     songs.add(song);
                 }

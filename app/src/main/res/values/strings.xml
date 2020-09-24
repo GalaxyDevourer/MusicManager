@@ -4,6 +4,7 @@
     <string name="main_welcome">Welcome, there you can manage your favourite bands and songs</string>
     <string name="main_show_button">Show Tracks</string>
     <string name="main_search_button">Search it!</string>
+    <string name="main_show_list_button">Check list of bands</string>
 
     <!-- activity_show_tracks -->
     <string name="show_tracks_list_songs">There will be songs list</string>
@@ -22,5 +23,6 @@
     <string name="search_check_is_single">Is song a single</string>
     <string name="search_check_not_single">Is song not a single</string>
     <string name="search_find_button">Find it!</string>
+    <string name="search_show_button">Show it!</string>
 
 </resources>

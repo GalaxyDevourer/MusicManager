@@ -1,5 +1,6 @@
 package com.chmnu.groupmanager.entities;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,8 +31,8 @@ public class BandStorage {
         );
     }
 
-    public List<String> getBandNames () {
-        List<String> bandNames = new LinkedList<>();;
+    public ArrayList<String> getBandNames () {
+        ArrayList<String> bandNames = new ArrayList<>();
         for (Band band: bandList) {
             bandNames.add(band.getBandName());
         }

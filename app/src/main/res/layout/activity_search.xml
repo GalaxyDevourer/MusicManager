@@ -152,11 +152,20 @@
         android:padding="10dp">
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="197dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/search_find_button"
-            android:onClick="onFindBtnClick"/>
+            android:onClick="onFindBtnClick"
+            android:text="@string/search_find_button" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:onClick="onSearchShowBtnClick"
+            android:text="@string/search_show_button" />
 
     </LinearLayout>
 

@@ -10,12 +10,10 @@ import android.widget.ListAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
-import com.chmnu.groupmanager.activities.SearchActivity;
+import com.chmnu.groupmanager.activities.BandsListActivity;
 import com.chmnu.groupmanager.activities.SearchActivityConstraint;
 import com.chmnu.groupmanager.activities.ShowTracksActivity;
 import com.chmnu.groupmanager.entities.BandStorage;
-import com.chmnu.groupmanager.entities.Song;
-import com.chmnu.groupmanager.entities.SongStorage;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,4 +51,11 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(intent);
     }
+
+
+    public void onShowListBtnClick (View view) {
+        Intent intent = new Intent(this, BandsListActivity.class);
+        startActivity(intent);
+    }
+
 }

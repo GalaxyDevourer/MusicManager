@@ -22,11 +22,13 @@ import com.chmnu.groupmanager.entities.BandStorage;
 import com.chmnu.groupmanager.entities.Song;
 import com.chmnu.groupmanager.entities.SongStorage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
 
     public static final String BAND_NAME = "bandName";
+
     private BandStorage bandStorage;
     private SongStorage songStorage;
 
@@ -56,6 +58,38 @@ public class SearchActivity extends AppCompatActivity {
         spinnerAlbum.setDropDownVerticalOffset(10);
 
         setBandAvatar(bandName);
+    }
+
+    public void onSearchShowBtnClick(View view) {
+        ArrayList<String> bandsList = new ArrayList<>();
+
+        EditText nameBand = findViewById(R.id.band_name_enter);
+        Spinner albumName = findViewById(R.id.album_name_choice);
+        RadioButton isEarly = findViewById(R.id.radio_early);
+        CheckBox isSingle = findViewById(R.id.check_is_single);
+
+        boolean radio = false;
+        if (isEarly.isChecked()) {
+            radio = true;
+        }
+
+        boolean checkBox = false;
+        if (isSingle.isChecked()) {
+            checkBox = true;
+        }
+
+        List<Song> tracksList = new SongStorage().getSearchedSongs(nameBand.getText().toString(), albumName.getSelectedItem().toString(), radio, checkBox );
+        for (Song song: tracksList) {
+            bandsList.add(song.getSignature());
+        }
+        if (tracksList.isEmpty()) {
+            bandsList.add("Sorry, but there is no songs for your request :(");
+        }
+
+        Intent intent = new Intent(this, ShowTracksActivity.class);
+        intent.putStringArrayListExtra(ShowTracksActivity.TRACKS_LIST_NAME, bandsList);
+
+        startActivity(intent);
     }
 
     public void onFindBtnClick (View view) {
