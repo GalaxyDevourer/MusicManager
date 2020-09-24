@@ -38,5 +38,8 @@
     <string name="data_is_single_checkbox">Is it song single or not?</string>
     <string name="data_add_track_button">Add track</string>
 
+    <!-- bands_list_menu -->
+    <string name="bands_list_menu_add">Add items</string>
+    <string name="bands_list_menu_send">Send bands</string>
 
 </resources>

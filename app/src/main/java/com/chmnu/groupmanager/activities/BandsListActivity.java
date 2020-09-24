@@ -3,6 +3,9 @@ package com.chmnu.groupmanager.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ActionProvider;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,7 +16,10 @@ import com.chmnu.groupmanager.entities.BandStorage;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ShareActionProvider;
+import androidx.core.view.MenuItemCompat;
 
 public class BandsListActivity extends AppCompatActivity {
 
@@ -21,6 +27,12 @@ public class BandsListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_bands_list);
+
+    }
+
+    @Override
+    protected void onStart () {
+        super.onStart();
 
         BandStorage bandStorage = new BandStorage();
         ArrayList<String> arrayList = bandStorage.getBandNames();
@@ -43,4 +55,36 @@ public class BandsListActivity extends AppCompatActivity {
         bandsListView.setOnItemClickListener(listener);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.bands_list_menu, menu);
+
+        StringBuilder bandsListMessage = new StringBuilder();
+
+        ListView bandsList = findViewById(R.id.bands_list);
+        for (int i=0; i < bandsList.getCount() ; i++){
+            bandsListMessage.append(bandsList.getItemAtPosition(i)).append("\n");
+        }
+
+        MenuItem menuItem = menu.findItem(R.id.bands_list_menu_send);
+        ShareActionProvider shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+
+        intent.putExtra(Intent.EXTRA_TEXT, bandsListMessage.toString());
+        shareActionProvider.setShareIntent(intent);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.bands_list_menu_add:
+                startActivity(new Intent (this, AddDataActivity.class));
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

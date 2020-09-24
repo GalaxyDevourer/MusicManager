@@ -12,8 +12,11 @@
         <activity android:name=".activities.SearchActivity" />
         <activity android:name=".activities.SearchActivityConstraint" />
         <activity android:name=".activities.ShowTracksActivity" />
-        <activity android:name=".activities.BandsListActivity" />
-        <activity android:name=".activities.AddDataActivity"
+        <activity
+            android:name=".activities.BandsListActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".activities.AddDataActivity"
             android:parentActivityName=".activities.BandsListActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
