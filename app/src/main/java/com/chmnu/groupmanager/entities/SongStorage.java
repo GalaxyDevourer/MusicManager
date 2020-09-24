@@ -5,33 +5,32 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SongStorage {
-    private List<Song> songsList;
 
-    public SongStorage() {
-        this.songsList = setSongs();
-    }
+    private static List<Song> songsList = new ArrayList<>(
+        Arrays.asList(
+            new Song("Smells Like Teen Spirit", "Nirvana", "USA" ,"Nevermind", "1991", true),
+            new Song("In Bloom", "Nirvana", "USA" ,"Nevermind", "1991", true),
+            new Song("Been a Son", "Nirvana", "USA" ,"Bleach", "1989", false),
+            new Song("Know", "System Of A Down", "Armenia-USA" ,"System of a Down", "1998", false),
+            new Song("Mind", "System Of A Down", "Armenia-USA" ,"System of a Down", "1998", false),
+            new Song("Peephole", "System Of A Down", "Armenia-USA" ,"System of a Down", "1998", false),
+            new Song("Sugar", "System Of A Down", "Armenia-USA" ,"System of a Down", "1998", true),
+            new Song("Needles", "System Of A Down", "Armenia-USA" ,"Toxicity", "2001", false),
+            new Song("Toxicity", "System Of A Down", "Armenia-USA" ,"Toxicity", "2001", true),
+            new Song("Liberate", "Disturbed", "USA" ,"Believe", "2002", true),
+            new Song("Darkness", "Disturbed", "USA" ,"Believe", "2002", false),
+            new Song("Guarded", "Disturbed", "USA" ,"Ten Thousand Fists", "2005", true),
+            new Song("Numb", "Linkin Park", "USA" ,"Meteora", "2003", true),
+            new Song("Blackout", "Linkin Park", "USA" ,"A Thousand Suns", "2010", false),
+            new Song("Sorry for Now", "Linkin Park", "USA" ,"One More Light", "2017", false),
+            new Song("It Has Begun", "Starset", "USA" ,"Transmissions", "2014", true),
+            new Song("Everglow", "Starset", "USA" ,"Vessels", "2017", false),
+            new Song("Mad World", "Gary Jules", "USA" ,"Trading Snakeoil for Wolftickets", "2001", false)
+        )
+    );
 
-    private List<Song> setSongs () {
-        return Arrays.asList(
-                new Song("Smells Like Teen Spirit", "Nirvana", "USA" ,"Nevermind", "1991", true),
-                new Song("In Bloom", "Nirvana", "USA" ,"Nevermind", "1991", true),
-                new Song("Been a Son", "Nirvana", "USA" ,"Bleach", "1989", false),
-                new Song("Know", "System Of A Down", "Armenia-USA" ,"System of a Down", "1998", false),
-                new Song("Mind", "System Of A Down", "Armenia-USA" ,"System of a Down", "1998", false),
-                new Song("Peephole", "System Of A Down", "Armenia-USA" ,"System of a Down", "1998", false),
-                new Song("Sugar", "System Of A Down", "Armenia-USA" ,"System of a Down", "1998", true),
-                new Song("Needles", "System Of A Down", "Armenia-USA" ,"Toxicity", "2001", false),
-                new Song("Toxicity", "System Of A Down", "Armenia-USA" ,"Toxicity", "2001", true),
-                new Song("Liberate", "Disturbed", "USA" ,"Believe", "2002", true),
-                new Song("Darkness", "Disturbed", "USA" ,"Believe", "2002", false),
-                new Song("Guarded", "Disturbed", "USA" ,"Ten Thousand Fists", "2005", true),
-                new Song("Numb", "Linkin Park", "USA" ,"Meteora", "2003", true),
-                new Song("Blackout", "Linkin Park", "USA" ,"A Thousand Suns", "2010", false),
-                new Song("Sorry for Now", "Linkin Park", "USA" ,"One More Light", "2017", false),
-                new Song("It Has Begun", "Starset", "USA" ,"Transmissions", "2014", true),
-                new Song("Everglow", "Starset", "USA" ,"Vessels", "2017", false),
-                new Song("Mad World", "Gary Jules", "USA" ,"Trading Snakeoil for Wolftickets", "2001", false)
-        );
+    public static void addSong (Song song) {
+        songsList.add(song);
     }
 
 

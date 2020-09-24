@@ -6,10 +6,20 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class BandStorage {
-    private List<Band> bandList;
 
-    public BandStorage() {
-        this.bandList = setBands();
+    private static List<Band> bandList = new ArrayList<>(
+            Arrays.asList(
+                    new Band("Nirvana", "1991"),
+                    new Band("System Of A Down", "2001"),
+                    new Band("Disturbed", "2002"),
+                    new Band("Linkin Park","2003"),
+                    new Band("Starset", "2014"),
+                    new Band("Gary Jules", "2001")
+            )
+    );
+
+    public static void addBand (Band band) {
+        bandList.add(band);
     }
 
     public List<Band> getBandList() {
@@ -17,18 +27,7 @@ public class BandStorage {
     }
 
     public void setBandList(List<Band> bandList) {
-        this.bandList = bandList;
-    }
-
-    private List<Band> setBands () {
-        return Arrays.asList(
-                new Band("Nirvana", "1991"),
-                new Band("System Of A Down", "2001"),
-                new Band("Disturbed", "2002"),
-                new Band("Linkin Park","2003"),
-                new Band("Starset", "2014"),
-                new Band("Gary Jules", "2001")
-        );
+        BandStorage.bandList = bandList;
     }
 
     public ArrayList<String> getBandNames () {

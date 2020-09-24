@@ -25,4 +25,18 @@
     <string name="search_find_button">Find it!</string>
     <string name="search_show_button">Show it!</string>
 
+    <!-- activity_add_data -->
+    <string name="data_band_name">Band name</string>
+    <string name="data_band_year">Band year</string>
+    <string name="data_add_group_button">Add band</string>
+    <string name="data_song_name">Song name</string>
+    <string name="data_song_band_name">Band name</string>
+    <string name="data_song_band_country">Band country</string>
+    <string name="data_song_album">Album name</string>
+    <string name="data_song_album_year">Album year</string>
+    <string name="data_is_single">Single</string>
+    <string name="data_is_single_checkbox">Is it song single or not?</string>
+    <string name="data_add_track_button">Add track</string>
+
+
 </resources>
