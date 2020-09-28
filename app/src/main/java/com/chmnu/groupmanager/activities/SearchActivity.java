@@ -3,6 +3,10 @@ package com.chmnu.groupmanager.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chmnu.groupmanager.R;
+import com.chmnu.groupmanager.database.BandsDatabaseHelper;
 import com.chmnu.groupmanager.entities.Band;
 import com.chmnu.groupmanager.entities.BandStorage;
 import com.chmnu.groupmanager.entities.Song;
@@ -27,7 +32,11 @@ import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
 
-    public static final String BAND_NAME = "bandName";
+    public static String BAND_ID = "id";
+    public static String BAND_NAME = "bandName";
+    private static String BAND_TABLE = "bands";
+    private static String BAND_COUNTRY = "bandCountry";
+    private static String BAND_YEAR = "bandYear";
 
     private BandStorage bandStorage;
     private SongStorage songStorage;
@@ -38,14 +47,16 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         Intent intent = getIntent();
-        String bandName = intent.getStringExtra(BAND_NAME);
+        int id = intent.getIntExtra(BAND_ID, 0);
+
+        Band selectedBand = getDataDB(id);
+        String bandName = selectedBand.getBandName();
 
         bandStorage = new BandStorage();
         songStorage = new SongStorage();
 
-        Band currentBand = bandStorage.getBandByName(bandName);
         TextView infoband = findViewById(R.id.group_information_label);
-        infoband.setText(currentBand.getSignature());
+        infoband.setText(selectedBand.getSignature());
 
         EditText bandNameEdit = findViewById(R.id.band_name_enter);
         bandNameEdit.setText(bandName);
@@ -54,10 +65,36 @@ public class SearchActivity extends AppCompatActivity {
         ListAdapter adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, songStorage.getAlbumsByBandName(bandName));
         spinnerAlbum.setAdapter((SpinnerAdapter) adapter);
-        spinnerAlbum.setDropDownHorizontalOffset(20);
-        spinnerAlbum.setDropDownVerticalOffset(10);
 
         setBandAvatar(bandName);
+    }
+
+    private Band getDataDB (int id) {
+        Band selectedBand = null;
+
+        SQLiteOpenHelper sqLiteOpenHelper = new BandsDatabaseHelper(this);
+        try {
+            SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
+            Cursor cursor = db.query(BAND_TABLE, new String[] {BAND_ID, BAND_NAME, BAND_COUNTRY, BAND_YEAR},
+                    BAND_ID + "=?", new String[] {Integer.toString(id)}, null, null, null);
+
+            if (cursor.moveToNext()) {
+                selectedBand = new Band(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+            }
+            else {
+                Toast toast = Toast.makeText(this, "No band with this id = " + id, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
+            cursor.close();
+            db.close();
+        }
+        catch (SQLException ex) {
+            Toast toast = Toast.makeText(this, "This DB is not available", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+        return selectedBand;
     }
 
     public void onSearchShowBtnClick(View view) {

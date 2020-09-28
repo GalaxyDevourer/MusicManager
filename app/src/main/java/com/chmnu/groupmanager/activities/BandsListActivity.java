@@ -1,14 +1,11 @@
 package com.chmnu.groupmanager.activities;
 
-
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.view.ActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,6 +29,7 @@ import androidx.core.view.MenuItemCompat;
 public class BandsListActivity extends AppCompatActivity {
 
     private static String BAND_TABLE = "bands";
+    private static String BAND_ID = "id";
     private static String BAND_NAME = "bandName";
     private static String BAND_COUNTRY = "bandCountry";
     private static String BAND_YEAR = "bandYear";
@@ -47,22 +45,19 @@ public class BandsListActivity extends AppCompatActivity {
     protected void onStart () {
         super.onStart();
 
-        getDataDB();
-
-        BandStorage bandStorage = new BandStorage();
-        ArrayList<String> arrayList = bandStorage.getBandNames();
+        ArrayList<Band> bandsList = getDataDB();
 
         ListView bandsListView = findViewById(R.id.bands_list);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayList);
+        ArrayAdapter<Band> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, bandsList);
         bandsListView.setAdapter(adapter);
 
         AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String band = adapterView.getItemAtPosition(i).toString();
+                Band band = (Band) adapterView.getItemAtPosition(i);
 
                 Intent intent = new Intent(BandsListActivity.this, SearchActivity.class);
-                intent.putExtra(SearchActivity.BAND_NAME, band);
+                intent.putExtra(SearchActivity.BAND_ID, band.getId());
 
                 startActivity(intent);
             }
@@ -110,9 +105,14 @@ public class BandsListActivity extends AppCompatActivity {
 
         try {
             SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
-            Cursor cursor = db.query(BAND_TABLE, new String[] {BAND_NAME, BAND_COUNTRY, BAND_YEAR},
-                    null, null, null, null, null);
+            Cursor cursor = db.query(BAND_TABLE, new String[] {BAND_ID, BAND_NAME, BAND_COUNTRY, BAND_YEAR},
+                    null, null, null, null, BAND_YEAR);
+
+            while (cursor.moveToNext()) {
+                bandsList.add(new Band(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3)));
+            }
             cursor.close();
+            db.close();
         }
         catch (SQLException ex) {
             Toast toast = Toast.makeText(this, "This DB is not available", Toast.LENGTH_SHORT);

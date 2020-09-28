@@ -1,7 +1,5 @@
 package com.chmnu.groupmanager.entities;
 
-import android.text.BoringLayout;
-
 public class Song {
     private String songName;
     private String bandName;

@@ -13,6 +13,7 @@ public class SongsDatabaseHelper extends SQLiteOpenHelper {
     private final static String DB_NAME = "songs";
     private final static int DB_VERSION = 1;
 
+    private static String SONG_TABLE = "songs";
     private static String SONG_NAME = "songName";
     private static String BAND_NAME = "bandName";
     private static String ALBUM_NAME = "album";
@@ -56,5 +57,7 @@ public class SongsDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(ALBUM_NAME, song.getAlbum());
         contentValues.put(ALBUM_YEAR, song.getAlbumYear());
         contentValues.put(SINGLE, song.getSingle());
+
+        db.insert(SONG_TABLE, null, contentValues);
     }
 }
