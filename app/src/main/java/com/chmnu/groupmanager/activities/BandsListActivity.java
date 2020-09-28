@@ -1,7 +1,12 @@
 package com.chmnu.groupmanager.activities;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.ActionProvider;
 import android.view.Menu;
@@ -10,8 +15,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.chmnu.groupmanager.R;
+import com.chmnu.groupmanager.database.BandsDatabaseHelper;
+import com.chmnu.groupmanager.entities.Band;
 import com.chmnu.groupmanager.entities.BandStorage;
 
 import java.util.ArrayList;
@@ -23,6 +31,11 @@ import androidx.core.view.MenuItemCompat;
 
 public class BandsListActivity extends AppCompatActivity {
 
+    private static String BAND_TABLE = "bands";
+    private static String BAND_NAME = "bandName";
+    private static String BAND_COUNTRY = "bandCountry";
+    private static String BAND_YEAR = "bandYear";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +46,8 @@ public class BandsListActivity extends AppCompatActivity {
     @Override
     protected void onStart () {
         super.onStart();
+
+        getDataDB();
 
         BandStorage bandStorage = new BandStorage();
         ArrayList<String> arrayList = bandStorage.getBandNames();
@@ -86,5 +101,24 @@ public class BandsListActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private ArrayList<Band> getDataDB () {
+        ArrayList<Band> bandsList = new ArrayList<>();
+
+        SQLiteOpenHelper sqLiteOpenHelper = new BandsDatabaseHelper(this);
+
+        try {
+            SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
+            Cursor cursor = db.query(BAND_TABLE, new String[] {BAND_NAME, BAND_COUNTRY, BAND_YEAR},
+                    null, null, null, null, null);
+            cursor.close();
+        }
+        catch (SQLException ex) {
+            Toast toast = Toast.makeText(this, "This DB is not available", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+        return bandsList;
     }
 }

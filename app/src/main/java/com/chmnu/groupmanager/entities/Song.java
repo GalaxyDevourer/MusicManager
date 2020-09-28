@@ -5,15 +5,13 @@ import android.text.BoringLayout;
 public class Song {
     private String songName;
     private String bandName;
-    private String bandCountry;
     private String album;
     private String albumYear;
     private Boolean single;
 
-    public Song(String songName, String bandName, String bandCountry, String album, String albumYear, Boolean single) {
+    public Song(String songName, String bandName, String album, String albumYear, Boolean single) {
         this.songName = songName;
         this.bandName = bandName;
-        this.bandCountry = bandCountry;
         this.album = album;
         this.albumYear = albumYear;
         this.single = single;
@@ -41,14 +39,6 @@ public class Song {
         this.bandName = bandName;
     }
 
-    public String getBandCountry() {
-        return bandCountry;
-    }
-
-    public void setBandCountry(String bandCountry) {
-        this.bandCountry = bandCountry;
-    }
-
     public String getAlbum() {
         return album;
     }
@@ -74,7 +64,7 @@ public class Song {
     }
 
     public String getSignature () {
-        return bandName + " [" + bandCountry + "]" + " - " + songName + " [ " + album + " " + albumYear + " ]";
+        return bandName + " - " + songName + " [ " + album + " " + albumYear + " ]";
     }
 
     public Boolean customEquals (Song song) {

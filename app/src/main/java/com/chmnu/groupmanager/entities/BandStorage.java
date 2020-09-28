@@ -9,12 +9,12 @@ public class BandStorage {
 
     private static List<Band> bandList = new ArrayList<>(
             Arrays.asList(
-                    new Band("Nirvana", "1991"),
-                    new Band("System Of A Down", "2001"),
-                    new Band("Disturbed", "2002"),
-                    new Band("Linkin Park","2003"),
-                    new Band("Starset", "2014"),
-                    new Band("Gary Jules", "2001")
+                    new Band("Nirvana", "USA", "1991"),
+                    new Band("System Of A Down","Armenia-USA","2001"),
+                    new Band("Disturbed", "USA", "2002"),
+                    new Band("Linkin Park", "USA", "2003"),
+                    new Band("Starset", "USA","2014"),
+                    new Band("Gary Jules", "USA","2001")
             )
     );
 
@@ -22,11 +22,11 @@ public class BandStorage {
         bandList.add(band);
     }
 
-    public List<Band> getBandList() {
+    public static List<Band> getBandList() {
         return bandList;
     }
 
-    public void setBandList(List<Band> bandList) {
+    public static void setBandList(List<Band> bandList) {
         BandStorage.bandList = bandList;
     }
 
