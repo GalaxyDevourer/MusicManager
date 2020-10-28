@@ -68,4 +68,9 @@ public class Song {
     public Boolean customEquals (Song song) {
         return bandName.equals(song.bandName) && album.equals(song.album) && single.equals(song.single);
     }
+
+    @Override
+    public String toString() {
+        return (songName != null) ? songName : "Null";
+    }
 }

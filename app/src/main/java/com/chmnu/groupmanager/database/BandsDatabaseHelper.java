@@ -10,7 +10,7 @@ import com.chmnu.groupmanager.entities.BandStorage;
 
 public class BandsDatabaseHelper extends SQLiteOpenHelper {
 
-    private final static String DB_NAME = "songs";
+    private final static String DB_NAME = "band_db";
     private final static int DB_VERSION = 1;
 
     private static String BAND_TABLE = "bands";

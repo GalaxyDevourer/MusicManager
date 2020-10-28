@@ -48,4 +48,9 @@ public class Band {
     public String getSignature () {
         return bandName + " [ " + bandYear + " ]";
     }
+
+    @Override
+    public String toString() {
+        return (bandName != null) ? bandName : "Null";
+    }
 }

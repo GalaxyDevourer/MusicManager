@@ -10,7 +10,7 @@ import com.chmnu.groupmanager.entities.SongStorage;
 
 public class SongsDatabaseHelper extends SQLiteOpenHelper {
 
-    private final static String DB_NAME = "songs";
+    private final static String DB_NAME = "song_db";
     private final static int DB_VERSION = 1;
 
     private static String SONG_TABLE = "songs";
