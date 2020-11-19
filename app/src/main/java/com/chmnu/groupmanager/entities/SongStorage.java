@@ -30,7 +30,19 @@ public class SongStorage {
     );
 
     public static List<Song> getSongsList() {
-        return songsList;
+        return getSongsList("");
+    }
+
+    public static List<Song> getSongsList(String bandName) {
+        List<Song> songs = new ArrayList<>();
+
+        for (Song song: songsList) {
+            if (song.getBandName().equals(bandName) || bandName.equals("")) {
+                songs.add(song);
+            }
+        }
+
+        return songs;
     }
 
     public static void setSongsList(List<Song> songsList) {
@@ -40,7 +52,6 @@ public class SongStorage {
     public static void addSong (Song song) {
         songsList.add(song);
     }
-
 
     public List<Song> getByBandName(String bandName) {
         List<Song> songs = new ArrayList<>();
