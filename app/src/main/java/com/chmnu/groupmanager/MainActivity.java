@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
         ListAdapter adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, bandStorage.getBandNames());
         spinnerAlbum.setAdapter((SpinnerAdapter) adapter);
-        spinnerAlbum.setDropDownHorizontalOffset(20);
-        spinnerAlbum.setDropDownVerticalOffset(10);
     }
 
     public void onShowBtnClick (View view) {

@@ -10,7 +10,7 @@ import com.chmnu.groupmanager.entities.BandStorage;
 import com.chmnu.groupmanager.entities.Song;
 import com.chmnu.groupmanager.entities.SongStorage;
 
-public class BandsDatabaseHelper extends SQLiteOpenHelper {
+public class MusicDatabaseHelper extends SQLiteOpenHelper {
 
     private final static String DB_NAME = "band_db";
     private final static int DB_VERSION = 2;
@@ -22,11 +22,12 @@ public class BandsDatabaseHelper extends SQLiteOpenHelper {
 
     private static String SONG_TABLE = "songs";
     private static String SONG_NAME = "songName";
-    private static String ALBUM_NAME = "album";
-    private static String ALBUM_YEAR = "albumYear";
-    private static String SINGLE = "single";
+    private static String SONG_ALBUM_NAME = "album";
+    private static String SONG_ALBUM_YEAR = "albumYear";
+    private static String SONG_SINGLE = "single";
+    private static String SONG_ID_BAND = "id_band";
 
-    public BandsDatabaseHelper (Context context) {
+    public MusicDatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 

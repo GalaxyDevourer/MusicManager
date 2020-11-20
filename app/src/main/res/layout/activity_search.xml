@@ -152,7 +152,14 @@
         android:padding="10dp">
 
         <Button
-            android:layout_width="197dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:onClick="onSearchBandDelete"
+            android:text="@string/search_delete_button" />
+
+        <Button
+            android:layout_width="148dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:onClick="onFindBtnClick"

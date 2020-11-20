@@ -1,12 +1,12 @@
 package com.chmnu.groupmanager.entities;
 
 public class Band {
-    private int id;
+    private Integer id;
     private String bandName;
     private String bandCountry;
     private String bandYear;
 
-    public Band(int id, String bandName, String bandCountry, String bandYear) {
+    public Band(Integer id, String bandName, String bandCountry, String bandYear) {
         this(bandName, bandCountry, bandYear);
         this.id = id;
     }
@@ -17,7 +17,7 @@ public class Band {
         this.bandYear = bandYear;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

@@ -1,13 +1,17 @@
 package com.chmnu.groupmanager.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -21,13 +25,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chmnu.groupmanager.R;
-import com.chmnu.groupmanager.database.BandsDatabaseHelper;
+import com.chmnu.groupmanager.database.MusicDatabaseHelper;
 import com.chmnu.groupmanager.entities.Band;
 import com.chmnu.groupmanager.entities.BandStorage;
 import com.chmnu.groupmanager.entities.Song;
 import com.chmnu.groupmanager.entities.SongStorage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
@@ -38,8 +41,12 @@ public class SearchActivity extends AppCompatActivity {
     private static String BAND_COUNTRY = "bandCountry";
     private static String BAND_YEAR = "bandYear";
 
+    public static final String BAND_ID_NAME = "bandID";
+
     private BandStorage bandStorage;
     private SongStorage songStorage;
+
+    private Band selectedBand;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +56,7 @@ public class SearchActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int id = intent.getIntExtra(BAND_ID, 0);
 
-        Band selectedBand = getDataDB(id);
+        selectedBand = getDataDB(id);
         String bandName = selectedBand.getBandName();
 
         bandStorage = new BandStorage();
@@ -72,7 +79,7 @@ public class SearchActivity extends AppCompatActivity {
     private Band getDataDB (int id) {
         Band selectedBand = null;
 
-        SQLiteOpenHelper sqLiteOpenHelper = new BandsDatabaseHelper(this);
+        SQLiteOpenHelper sqLiteOpenHelper = new MusicDatabaseHelper(this);
         try {
             SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
             Cursor cursor = db.query(BAND_TABLE, new String[] {BAND_ID, BAND_NAME, BAND_COUNTRY, BAND_YEAR},
@@ -98,6 +105,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void onSearchShowBtnClick(View view) {
+        /*
         ArrayList<String> bandsList = new ArrayList<>();
 
         EditText nameBand = findViewById(R.id.band_name_enter);
@@ -123,8 +131,10 @@ public class SearchActivity extends AppCompatActivity {
             bandsList.add("Sorry, but there is no songs for your request :(");
         }
 
+        */
+
         Intent intent = new Intent(this, ShowTracksActivity.class);
-        intent.putStringArrayListExtra(ShowTracksActivity.TRACKS_LIST_NAME, bandsList);
+        intent.putExtra(ShowTracksActivity.BAND_ID_NAME, selectedBand.getId());
 
         startActivity(intent);
     }
@@ -181,5 +191,43 @@ public class SearchActivity extends AppCompatActivity {
     private String bandNameValidator (String bandName) {
         String validName = bandName.toLowerCase();
         return validName.replace(" ", "_");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.search_menu_add:
+                Intent intent = new Intent(this, AddSongsActivity.class);
+                intent.putExtra(ShowTracksActivity.BAND_ID_NAME, selectedBand.getId());
+                startActivity(intent);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void onSearchBandDelete (View view) {
+        SQLiteOpenHelper sqLiteOpenHelper = new MusicDatabaseHelper(this);
+        int id_band = selectedBand.getId();
+
+        try {
+            SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
+            db.delete("bands", "id=?", new String[] {Integer.toString(id_band)});
+
+            Intent intent = new Intent(this, BandsListActivity.class);
+            startActivity(intent);
+        }
+        catch (SQLiteException ex) {
+            Toast toast = Toast.makeText(this, "This DB is not available", Toast.LENGTH_SHORT);
+            toast.show();
+
+            ex.getStackTrace();
+        }
     }
 }

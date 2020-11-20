@@ -22,24 +22,33 @@
     <string name="search_radio_decade_early">Ealry than 2000</string>
     <string name="search_check_is_single">Is song a single</string>
     <string name="search_check_not_single">Is song not a single</string>
+    <string name="search_delete_button">Delete?</string>
     <string name="search_find_button">Find it!</string>
     <string name="search_show_button">Show it!</string>
 
-    <!-- activity_add_data -->
+    <!-- activity_add_band -->
     <string name="data_band_name">Band name</string>
     <string name="data_band_year">Band year</string>
-    <string name="data_add_group_button">Add band</string>
-    <string name="data_song_name">Song name</string>
-    <string name="data_song_band_name">Band name</string>
     <string name="data_song_band_country">Band country</string>
-    <string name="data_song_album">Album name</string>
-    <string name="data_song_album_year">Album year</string>
-    <string name="data_is_single">Single</string>
-    <string name="data_is_single_checkbox">Is it song single or not?</string>
-    <string name="data_add_track_button">Add track</string>
+    <string name="data_add_group_button">Add band</string>
+
+    <!-- activity_add_songs -->
+    <string name="add_song_song_name">Song name</string>
+    <string name="add_song_band_name">Band name</string>
+    <string name="add_song_album">Album name</string>
+    <string name="add_song_album_year">Album year</string>
+    <string name="add_song_is_single">Single</string>
+    <string name="add_song_id_band">Band ID</string>
+    <string name="add_song_is_single_checkbox">Is it song single or not?</string>
+    <string name="add_song_use_id">Use id for update?</string>
+    <string name="add_song_add_song_button">Add song</string>
+    <string name="add_song_delete_song_button">Delete song</string>
 
     <!-- bands_list_menu -->
-    <string name="bands_list_menu_add">Add items</string>
     <string name="bands_list_menu_send">Send bands</string>
+    <string name="bands_list_menu_add">Add bands</string>
+
+    <!-- search_menu -->
+    <string name="search_menu_add">Add songs</string>
 
 </resources>

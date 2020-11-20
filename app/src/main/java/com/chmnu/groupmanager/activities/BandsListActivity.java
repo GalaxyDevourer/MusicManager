@@ -15,9 +15,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.chmnu.groupmanager.R;
-import com.chmnu.groupmanager.database.BandsDatabaseHelper;
+import com.chmnu.groupmanager.database.MusicDatabaseHelper;
 import com.chmnu.groupmanager.entities.Band;
-import com.chmnu.groupmanager.entities.BandStorage;
 
 import java.util.ArrayList;
 
@@ -92,7 +91,8 @@ public class BandsListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.bands_list_menu_add:
-                startActivity(new Intent (this, AddDataActivity.class));
+                Intent intent = new Intent(this, AddBandsActivity.class);
+                startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -101,7 +101,7 @@ public class BandsListActivity extends AppCompatActivity {
     private ArrayList<Band> getDataDB () {
         ArrayList<Band> bandsList = new ArrayList<>();
 
-        SQLiteOpenHelper sqLiteOpenHelper = new BandsDatabaseHelper(this);
+        SQLiteOpenHelper sqLiteOpenHelper = new MusicDatabaseHelper(this);
 
         try {
             SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
@@ -117,6 +117,8 @@ public class BandsListActivity extends AppCompatActivity {
         catch (SQLException ex) {
             Toast toast = Toast.makeText(this, "This DB is not available", Toast.LENGTH_SHORT);
             toast.show();
+
+            ex.getStackTrace();
         }
 
         return bandsList;
