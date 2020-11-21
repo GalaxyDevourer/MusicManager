@@ -5,10 +5,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.chmnu.groupmanager.entities.Band;
-import com.chmnu.groupmanager.entities.BandStorage;
-import com.chmnu.groupmanager.entities.Song;
-import com.chmnu.groupmanager.entities.SongStorage;
+import com.chmnu.groupmanager.models.entities.music.Band;
+import com.chmnu.groupmanager.models.entities.music.BandStorage;
+import com.chmnu.groupmanager.models.entities.music.Song;
+import com.chmnu.groupmanager.models.entities.music.SongStorage;
 
 public class MusicDatabaseHelper extends SQLiteOpenHelper {
 

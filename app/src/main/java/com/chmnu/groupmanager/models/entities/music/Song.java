@@ -1,4 +1,4 @@
-package com.chmnu.groupmanager.entities;
+package com.chmnu.groupmanager.models.entities.music;
 
 public class Song {
     private Integer id;

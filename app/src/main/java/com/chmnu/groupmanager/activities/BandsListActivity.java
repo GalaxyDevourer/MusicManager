@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.chmnu.groupmanager.R;
 import com.chmnu.groupmanager.database.MusicDatabaseHelper;
-import com.chmnu.groupmanager.entities.Band;
+import com.chmnu.groupmanager.models.entities.music.Band;
 
 import java.util.ArrayList;
 

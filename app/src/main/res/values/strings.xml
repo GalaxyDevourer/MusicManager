@@ -5,6 +5,7 @@
     <string name="main_show_button">Show Tracks</string>
     <string name="main_search_button">Search it!</string>
     <string name="main_show_list_button">Check list of bands</string>
+    <string name="main_check_todos_button">Check TODOs</string>
 
     <!-- activity_show_tracks -->
     <string name="show_tracks_list_songs">There will be songs list</string>

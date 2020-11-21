@@ -56,12 +56,12 @@
         android:id="@+id/group_avatar"
         android:layout_width="312dp"
         android:layout_height="157dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="20dp"
         android:baselineAligned="false"
         android:scaleType="centerCrop"
         android:src="@drawable/music_bands"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.659"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/show_search" />
 
@@ -78,5 +78,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/group_avatar"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/main_check_todos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="onJsonGetClick"
+        android:text="@string/main_check_todos_button"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/show_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

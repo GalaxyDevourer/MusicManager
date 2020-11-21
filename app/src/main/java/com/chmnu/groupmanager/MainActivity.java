@@ -11,9 +11,10 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
 import com.chmnu.groupmanager.activities.BandsListActivity;
+import com.chmnu.groupmanager.activities.UsersListActivity;
 import com.chmnu.groupmanager.activities.SearchActivityConstraint;
 import com.chmnu.groupmanager.activities.ShowTracksActivity;
-import com.chmnu.groupmanager.entities.BandStorage;
+import com.chmnu.groupmanager.models.entities.music.BandStorage;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,9 +51,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     public void onShowListBtnClick (View view) {
         Intent intent = new Intent(this, BandsListActivity.class);
+        startActivity(intent);
+    }
+
+    public void onJsonGetClick (View view) {
+        Intent intent = new Intent(this, UsersListActivity.class);
         startActivity(intent);
     }
 

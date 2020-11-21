@@ -17,10 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chmnu.groupmanager.R;
-import com.chmnu.groupmanager.entities.Band;
-import com.chmnu.groupmanager.entities.BandStorage;
-import com.chmnu.groupmanager.entities.Song;
-import com.chmnu.groupmanager.entities.SongStorage;
+import com.chmnu.groupmanager.models.entities.music.Band;
+import com.chmnu.groupmanager.models.entities.music.BandStorage;
+import com.chmnu.groupmanager.models.entities.music.Song;
+import com.chmnu.groupmanager.models.entities.music.SongStorage;
 
 import java.util.List;
 

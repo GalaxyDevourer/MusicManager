@@ -1,8 +1,7 @@
-package com.chmnu.groupmanager.entities;
+package com.chmnu.groupmanager.models.entities.music;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 public class BandStorage {
