@@ -22,7 +22,6 @@ import com.chmnu.groupmanager.entities.Song;
 import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
 
 public class AddSongsActivity extends AppCompatActivity {
 
@@ -78,7 +77,7 @@ public class AddSongsActivity extends AppCompatActivity {
         String album = ((EditText) findViewById(R.id.add_data_album_name)).getText().toString();
         String albumYear = ((EditText) findViewById(R.id.add_data_album_year)).getText().toString();
         Boolean single = ((CheckBox) findViewById(R.id.add_data_check_is_single)).isChecked();
-        String id_band = ((Spinner) findViewById(R.id.bands_id_choice)).getSelectedItem().toString();
+        String id_band = ((Band)(((Spinner) findViewById(R.id.bands_id_choice)).getSelectedItem())).getId().toString();
 
         SQLiteOpenHelper sqLiteOpenHelper = new MusicDatabaseHelper(this);
         try {
@@ -107,11 +106,11 @@ public class AddSongsActivity extends AppCompatActivity {
 
     public void updateSong () {
         String songName = ((EditText) findViewById(R.id.add_data_song_name)).getText().toString();
-        String bandName = ((EditText) findViewById(R.id.add_data_band_name)).getText().toString();
+        String bandName = ((EditText) findViewById(R.id.add_data_song_band_name)).getText().toString();
         String album = ((EditText) findViewById(R.id.add_data_album_name)).getText().toString();
         String albumYear = ((EditText) findViewById(R.id.add_data_album_year)).getText().toString();
         Boolean single = ((CheckBox) findViewById(R.id.add_data_check_is_single)).isChecked();
-        String id_band = ((Spinner) findViewById(R.id.bands_id_choice)).getSelectedItem().toString();
+        String id_band = ((Band)(((Spinner) findViewById(R.id.bands_id_choice)).getSelectedItem())).getId().toString();
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(SONG_NAME, songName);

@@ -21,7 +21,6 @@ import com.chmnu.groupmanager.entities.Band;
 import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
 
 public class AddBandsActivity extends AppCompatActivity {
 
