@@ -6,6 +6,8 @@ public class Band {
     private String bandCountry;
     private String bandYear;
 
+    public Band () {};
+
     public Band(Integer id, String bandName, String bandCountry, String bandYear) {
         this(bandName, bandCountry, bandYear);
         this.id = id;

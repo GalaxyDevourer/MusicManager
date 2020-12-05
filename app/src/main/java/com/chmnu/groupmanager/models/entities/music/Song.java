@@ -9,6 +9,8 @@ public class Song {
     private Boolean single;
     private Integer id_band;
 
+    public Song() {};
+
     public Song(Integer id, String songName, String bandName, String album, String albumYear,
                 Boolean single, Integer id_band) {
         this(songName, bandName, album, albumYear, single);

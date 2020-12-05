@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.chmnu.groupmanager.R;
 import com.chmnu.groupmanager.database.MusicDatabaseHelper;
 import com.chmnu.groupmanager.models.entities.music.Band;
+import com.chmnu.groupmanager.models.entities.music.BandStorage;
 
 import java.util.ArrayList;
 
@@ -44,22 +45,20 @@ public class BandsListActivity extends AppCompatActivity {
     protected void onStart () {
         super.onStart();
 
-        ArrayList<Band> bandsList = getDataDB();
+        //ArrayList<Band> bandsList = getDataDB();
+        ArrayList<Band> bandsList = new BandStorage().getBandsHttp();
 
         ListView bandsListView = findViewById(R.id.bands_list);
         ArrayAdapter<Band> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, bandsList);
         bandsListView.setAdapter(adapter);
 
-        AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Band band = (Band) adapterView.getItemAtPosition(i);
+        AdapterView.OnItemClickListener listener = (adapterView, view, i, l) -> {
+            Band band = (Band) adapterView.getItemAtPosition(i);
 
-                Intent intent = new Intent(BandsListActivity.this, SearchActivity.class);
-                intent.putExtra(SearchActivity.BAND_ID, band.getId());
+            Intent intent = new Intent(BandsListActivity.this, SearchActivity.class);
+            intent.putExtra(SearchActivity.BAND_ID, band.getId());
 
-                startActivity(intent);
-            }
+            startActivity(intent);
         };
         bandsListView.setOnItemClickListener(listener);
     }

@@ -56,7 +56,7 @@ public class SearchActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int id = intent.getIntExtra(BAND_ID, 0);
 
-        selectedBand = getDataDB(id);
+        selectedBand = new BandStorage().getBandHttp(id);
         String bandName = selectedBand.getBandName();
 
         bandStorage = new BandStorage();

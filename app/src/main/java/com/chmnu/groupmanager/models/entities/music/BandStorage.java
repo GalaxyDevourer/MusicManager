@@ -1,5 +1,12 @@
 package com.chmnu.groupmanager.models.entities.music;
 
+import com.chmnu.groupmanager.models.entities.http.User;
+import com.chmnu.groupmanager.models.utils.http.HttpDataGetter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -45,6 +52,49 @@ public class BandStorage {
             }
         }
         return null;
+    }
+
+    public ArrayList<Band> getBandsHttp () {
+        ArrayList<Band> bandArrayList = new ArrayList<>();
+        String response = new HttpDataGetter("http://192.168.1.127/api/?action=get_bands_list").getData();
+
+        try {
+            JSONArray jsonArray = new JSONArray(response);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject obj = jsonArray.getJSONObject(i);
+                Band band = new Band(
+                        obj.getInt("id"),
+                        obj.getString("bandName"),
+                        obj.getString("bandCountry"),
+                        obj.getString("bandYear"));
+                bandArrayList.add(band);
+            }
+        }
+        catch (JSONException jex) {
+            jex.printStackTrace();
+        }
+
+        return  bandArrayList;
+    }
+
+    public Band getBandHttp (Integer id) {
+        Band band = new Band();
+        String response = new HttpDataGetter("http://192.168.1.127/api/?action=get_band&id_band=" + id).getData();
+
+        try {
+            JSONObject obj = new JSONObject(response);
+            band = new Band(
+                    obj.getInt("id"),
+                    obj.getString("bandName"),
+                    obj.getString("bandCountry"),
+                    obj.getString("bandYear"));
+        }
+        catch (JSONException jex) {
+            jex.printStackTrace();
+        }
+
+        return band;
     }
 
 }
