@@ -11,6 +11,15 @@ public class Song {
 
     public Song() {};
 
+    public Song(String songName, String bandName, String album, String albumYear, Boolean single, Integer id_band) {
+        this.songName = songName;
+        this.bandName = bandName;
+        this.album = album;
+        this.albumYear = albumYear;
+        this.single = single;
+        this.id_band = id_band;
+    }
+
     public Song(Integer id, String songName, String bandName, String album, String albumYear,
                 Boolean single, Integer id_band) {
         this(songName, bandName, album, albumYear, single);

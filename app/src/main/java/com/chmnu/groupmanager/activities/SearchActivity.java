@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.Menu;
@@ -185,21 +184,6 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void onSearchBandDelete (View view) {
-        SQLiteOpenHelper sqLiteOpenHelper = new MusicDatabaseHelper(this);
-        int id_band = selectedBand.getId();
-
-        try {
-            SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
-            db.delete("bands", "id=?", new String[] {Integer.toString(id_band)});
-
-            Intent intent = new Intent(this, BandsListActivity.class);
-            startActivity(intent);
-        }
-        catch (SQLiteException ex) {
-            Toast toast = Toast.makeText(this, "This DB is not available", Toast.LENGTH_SHORT);
-            toast.show();
-
-            ex.getStackTrace();
-        }
+        new BandStorage().deleteBandHttp(selectedBand);
     }
 }

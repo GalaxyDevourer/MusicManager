@@ -1,5 +1,11 @@
 package com.chmnu.groupmanager.models.entities.music;
 
+import com.chmnu.groupmanager.models.utils.http.HttpDataGetter;
+import com.chmnu.groupmanager.models.utils.http.HttpDataPoster;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -99,5 +105,74 @@ public class SongStorage {
 
     public Boolean isEarly (String year) {
         return Integer.parseInt(year) < 2000;
+    }
+
+    public Song getSongHttp (Integer id) {
+        Song song = new Song();
+        String response = new HttpDataGetter("http://192.168.1.127/api/?action=get_song&id_song=" + id).getData();
+
+        try {
+            JSONObject obj = new JSONObject(response);
+            song = new Song(
+                    obj.getInt("id"),
+                    obj.getString("songName"),
+                    obj.getString("bandName"),
+                    obj.getString("album"),
+                    obj.getString("albumYear"),
+                    obj.getBoolean("single"),
+                    obj.getInt("id_band"));
+        }
+        catch (JSONException jex) {
+            jex.printStackTrace();
+        }
+
+        return song;
+    }
+
+    public void addSongHttp (Song song) {
+        JSONObject data = new JSONObject();
+        try {
+            data.put("songName", song.getBandName());
+            data.put("bandName", song.getBandName());
+            data.put("album", song.getAlbum());
+            data.put("albumYear", song.getAlbumYear());
+            data.put("single", song.getSingle());
+            data.put("id_band", song.getId_band());
+        }
+        catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+
+        new HttpDataPoster("http://192.168.1.127/api/?action=add_song", data).getData();
+    }
+
+    public void updateSongHttp (Song song) {
+        JSONObject data = new JSONObject();
+        try {
+            data.put("id", song.getId());
+            data.put("songName", song.getBandName());
+            data.put("bandName", song.getBandName());
+            data.put("album", song.getAlbum());
+            data.put("albumYear", song.getAlbumYear());
+            data.put("single", song.getSingle());
+            data.put("id_band", song.getId_band());
+        }
+        catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+
+        new HttpDataPoster("http://192.168.1.127/api/?action=update_song", data).getData();
+    }
+
+    public void deleteSongHttp (Song song) {
+        JSONObject data = new JSONObject();
+        try {
+            data.put("id", song.getId());
+        }
+        catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+
+        new HttpDataPoster("http://192.168.1.127/api/?action=delete_song", data).getData();
     }
 }

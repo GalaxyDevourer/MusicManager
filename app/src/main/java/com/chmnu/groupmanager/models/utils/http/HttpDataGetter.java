@@ -1,5 +1,7 @@
 package com.chmnu.groupmanager.models.utils.http;
 
+import com.chmnu.groupmanager.models.entities.http.UserData;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -11,7 +13,7 @@ public class HttpDataGetter implements Runnable {
     private String url;
 
     public HttpDataGetter(String url) {
-        this.url = url;
+        this.url = url + "&token=" + UserData.token;
     }
 
     public String getData () {

@@ -45,6 +45,11 @@
     <string name="add_song_add_song_button">Add song</string>
     <string name="add_song_delete_song_button">Delete song</string>
 
+    <!-- auth -->
+    <string name="auth_login_label">Login</string>
+    <string name="auth_password_label">Password</string>
+    <string name="auth_log_in_button">Log In</string>
+
     <!-- bands_list_menu -->
     <string name="bands_list_menu_send">Send bands</string>
     <string name="bands_list_menu_add">Add bands</string>

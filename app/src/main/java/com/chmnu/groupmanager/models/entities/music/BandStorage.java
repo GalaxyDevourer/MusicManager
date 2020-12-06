@@ -1,7 +1,7 @@
 package com.chmnu.groupmanager.models.entities.music;
 
-import com.chmnu.groupmanager.models.entities.http.User;
 import com.chmnu.groupmanager.models.utils.http.HttpDataGetter;
+import com.chmnu.groupmanager.models.utils.http.HttpDataPoster;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -95,6 +95,47 @@ public class BandStorage {
         }
 
         return band;
+    }
+
+    public void addBandHttp (Band band) {
+        JSONObject data = new JSONObject();
+        try {
+            data.put("bandName", band.getBandName());
+            data.put("bandCountry", band.getBandCountry());
+            data.put("bandYear", band.getBandYear());
+        }
+        catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+
+        new HttpDataPoster("http://192.168.1.127/api/?action=add_band", data).getData();
+    }
+
+    public void updateBandHttp (Band band) {
+        JSONObject data = new JSONObject();
+        try {
+            data.put("id", band.getId());
+            data.put("bandName", band.getBandName());
+            data.put("bandCountry", band.getBandCountry());
+            data.put("bandYear", band.getBandYear());
+        }
+        catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+
+        new HttpDataPoster("http://192.168.1.127/api/?action=update_band", data).getData();
+    }
+
+    public void deleteBandHttp (Band band) {
+        JSONObject data = new JSONObject();
+        try {
+            data.put("id", band.getId());
+        }
+        catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+
+        new HttpDataPoster("http://192.168.1.127/api/?action=delete_band", data).getData();
     }
 
 }

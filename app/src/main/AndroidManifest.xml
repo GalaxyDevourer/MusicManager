@@ -23,15 +23,17 @@
         <activity android:name=".activities.TaskActivity" />
         <activity android:name=".activities.UsersListActivity" />
         <activity android:name=".activities.TasksListActivity" />
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".activities.BandsListActivity"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".activities.AddBandsActivity"
-            android:parentActivityName=".activities.BandsListActivity"/>
-        <activity android:name=".MainActivity">
+            android:parentActivityName=".activities.BandsListActivity" />
+        <activity android:name=".activities.AuthActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

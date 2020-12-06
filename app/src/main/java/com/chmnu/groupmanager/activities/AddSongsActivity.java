@@ -1,10 +1,8 @@
 package com.chmnu.groupmanager.activities;
 
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +16,7 @@ import com.chmnu.groupmanager.R;
 import com.chmnu.groupmanager.database.MusicDatabaseHelper;
 import com.chmnu.groupmanager.models.entities.music.Band;
 import com.chmnu.groupmanager.models.entities.music.Song;
+import com.chmnu.groupmanager.models.entities.music.SongStorage;
 
 import java.util.ArrayList;
 
@@ -77,31 +76,11 @@ public class AddSongsActivity extends AppCompatActivity {
         String album = ((EditText) findViewById(R.id.add_data_album_name)).getText().toString();
         String albumYear = ((EditText) findViewById(R.id.add_data_album_year)).getText().toString();
         Boolean single = ((CheckBox) findViewById(R.id.add_data_check_is_single)).isChecked();
-        String id_band = ((Band)(((Spinner) findViewById(R.id.bands_id_choice)).getSelectedItem())).getId().toString();
+        Integer id_band = ((Song)(((Spinner) findViewById(R.id.bands_id_choice)).getSelectedItem())).getId();
 
-        SQLiteOpenHelper sqLiteOpenHelper = new MusicDatabaseHelper(this);
-        try {
-            SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(SONG_NAME, songName);
-            contentValues.put(BAND_NAME, bandName);
-            contentValues.put(SONG_ALBUM_NAME, album);
-            contentValues.put(SONG_ALBUM_YEAR, albumYear);
-            contentValues.put(SONG_SINGLE, single);
-            contentValues.put(SONG_ID_BAND, id_band);
+        Song song = new Song(songName,bandName,album,albumYear,single,id_band);
+        new SongStorage().addSongHttp(song);
 
-            db.insert(SONG_TABLE, null, contentValues);
-            db.close();
-
-            Toast toast = Toast.makeText(this, "Song successfully added!", Toast.LENGTH_SHORT);
-            toast.show();
-        }
-        catch (SQLiteException ex) {
-            Toast toast = Toast.makeText(this, "This DB is not available", Toast.LENGTH_SHORT);
-            toast.show();
-
-            ex.getStackTrace();
-        }
     }
 
     public void updateSong () {
@@ -110,52 +89,21 @@ public class AddSongsActivity extends AppCompatActivity {
         String album = ((EditText) findViewById(R.id.add_data_album_name)).getText().toString();
         String albumYear = ((EditText) findViewById(R.id.add_data_album_year)).getText().toString();
         Boolean single = ((CheckBox) findViewById(R.id.add_data_check_is_single)).isChecked();
-        String id_band = ((Band)(((Spinner) findViewById(R.id.bands_id_choice)).getSelectedItem())).getId().toString();
+        Integer id_band = ((Song)(((Spinner) findViewById(R.id.bands_id_choice)).getSelectedItem())).getId();
 
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(SONG_NAME, songName);
-        contentValues.put(BAND_NAME, bandName);
-        contentValues.put(SONG_ALBUM_NAME, album);
-        contentValues.put(SONG_ALBUM_YEAR, albumYear);
-        contentValues.put(SONG_SINGLE, single);
-        contentValues.put(SONG_ID_BAND, id_band);
+        Spinner songSpinner = findViewById(R.id.songs_id_choice);
+        Integer id = ((Song) songSpinner.getSelectedItem()).getId();
 
-        Spinner song = findViewById(R.id.songs_id_choice);
-        String id = ((Song) song.getSelectedItem()).getId().toString();
+        Song song = new Song(id,songName,bandName,album,albumYear,single,id_band);
+        new SongStorage().updateSongHttp(song);
 
-        SQLiteOpenHelper sqLiteOpenHelper = new MusicDatabaseHelper(this);
-        try {
-            SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
-            db.update(SONG_TABLE, contentValues, "id=?", new String[] {id});
-            db.close();
-
-            Toast toast = Toast.makeText(this, "Song successfully updated!", Toast.LENGTH_SHORT);
-            toast.show();
-        }
-        catch (SQLiteException ex) {
-            Toast toast = Toast.makeText(this, "This DB is not available", Toast.LENGTH_SHORT);
-            toast.show();
-
-            ex.getStackTrace();
-        }
     }
 
     public void onAddSongDeleteSong (View view) {
-        SQLiteOpenHelper sqLiteOpenHelper = new MusicDatabaseHelper(this);
-
         Spinner id_song = findViewById(R.id.songs_id_choice);
-        String id_song_str = ((Song) id_song.getSelectedItem()).getId().toString();
+        Song song = ((Song) id_song.getSelectedItem());
 
-        try {
-            SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
-            db.delete("songs", "id=?", new String[] {id_song_str});
-        }
-        catch (SQLiteException ex) {
-            Toast toast = Toast.makeText(this, "This DB is not available", Toast.LENGTH_SHORT);
-            toast.show();
-
-            ex.getStackTrace();
-        }
+        new SongStorage().deleteSongHttp(song);
     }
 
     private ArrayList<Band> getBandsFromDB () {
